@@ -50,5 +50,7 @@ jobs:
           gh api --method POST "/repos/${{ github.repository }}/pages" -f build_type=workflow \
             || gh api --method PUT "/repos/${{ github.repository }}/pages" -f build_type=workflow \
             || true
+          sleep 10
+      - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
