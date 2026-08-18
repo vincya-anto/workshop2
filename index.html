@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ProjectSight dashboard — project progress, records, safety, and assignments."
+    />
+    <title>ProjectSight — Home</title>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme')
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+          var resolved =
+            stored === 'dark' || (stored !== 'light' && prefersDark) ? 'dark' : 'light'
+          var root = document.documentElement
+          root.setAttribute(
+            'data-theme',
+            resolved === 'dark' ? 'modus-modern-dark' : 'modus-modern-light',
+          )
+          root.setAttribute('data-mode', resolved)
+          root.classList.remove('light', 'dark')
+          root.classList.add(resolved)
+          localStorage.setItem(
+            'modus-theme-config',
+            JSON.stringify({ theme: 'modus-modern', mode: resolved }),
+          )
+          if (!stored) localStorage.setItem('theme', 'system')
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'modus-modern-light')
+          document.documentElement.setAttribute('data-mode', 'light')
+          document.documentElement.classList.add('light')
+        }
+      })()
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@trimble-oss/modus-icons@1/dist/modus-outlined/fonts/modus-icons.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@trimble-oss/modus-icons@1/dist/modus-solid/fonts/modus-icons.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/modus-web-components/modus-icons.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
